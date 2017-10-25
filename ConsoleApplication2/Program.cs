@@ -13,9 +13,7 @@ namespace AirCompany
             Airplane Plane=null;
             Console.WriteLine("Select a plane");
             Console.WriteLine("a - An 124 \"Ruslan\"");
-            Console.WriteLine("b - Boing 747");
-
-            
+            Console.WriteLine("b - Boing 747");  
             do
             {
                 bool result = char.TryParse(Console.ReadLine(), out  char key);
@@ -38,9 +36,9 @@ namespace AirCompany
             } while (Plane==null);
             int NewAltitude;
             Console.WriteLine(Plane.ToString());
+            int i ;
             do
             {
-                
                 Console.WriteLine("In this moment");
                 Console.WriteLine("Altitude - "+Plane.Altitude);
                 Console.WriteLine("AutoPilot - " + Plane.AutoPilotOn);
@@ -48,14 +46,53 @@ namespace AirCompany
                 Console.WriteLine("\nSet New Altitude ");
                 NewAltitude=Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("AutoPilot On?(y/n) ");
-                Plane.AutoPilotOn=(Console.ReadKey().Key == ConsoleKey.Y) ? true : false;
+                do
+                {
+                    i = 0;
+                    bool result = char.TryParse(Console.ReadLine(), out char key);
+                    if (result == false)
+                    {
+                        Console.WriteLine("Error! Enter one character!");
+                        i++;
+                        continue;
+                    }
+                     if(key == 'y') Plane.AutoPilotOn = true;
+                    else
+                    {
+                        if (key == 'n') Plane.AutoPilotOn = false;
+                        else
+                        {
+                            Console.WriteLine("Error! Set y or n !");
+                            i++;
+                        }
+                    }
+                } while (i!=0);  
                 Console.WriteLine("\nForsage On?(y/n) ");
-                Plane.Forsage = (Console.ReadKey().Key == ConsoleKey.Y) ? true : false;
+                do
+                {
+                    i = 0;
+                    bool result = char.TryParse(Console.ReadLine(), out char key);
+                    if (result == false)
+                    {
+                        Console.WriteLine("Error! Enter one character!");
+                        i++;
+                        continue;
+                    }
+                    if (key == 'y') Plane.Forsage = true;
+                    else
+                    {
+                        if (key == 'n') Plane.Forsage = false;
+                        else
+                        {
+                            Console.WriteLine("Error! Set y or n !");
+                            i++;
+                        }
+                    }
+                } while (i != 0);
                 Plane.SetAltitude(NewAltitude);
                 Console.Clear();
                 Console.WriteLine("Altitude - " + Plane.Altitude);
-                Console.WriteLine("Do You want to  continue?(y/n) ");
-                
+                Console.WriteLine("Do You want to  continue?(y/n) ");  
             } while (Console.ReadKey().Key != ConsoleKey.N);
 
         }
