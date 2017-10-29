@@ -13,10 +13,11 @@ namespace AirCompany
             Airplane Plane=null;
             Console.WriteLine("Select a plane");
             Console.WriteLine("a - An 124 \"Ruslan\"");
-            Console.WriteLine("b - Boing 747");  
+            Console.WriteLine("b - Boing 747");
+            char key;
             do
             {
-                bool result = char.TryParse(Console.ReadLine(), out  char key);
+                bool result = char.TryParse(Console.ReadLine(), out   key);
                 if(result==false)
                 {
                     Console.WriteLine("Error! Enter one character!");
@@ -49,7 +50,7 @@ namespace AirCompany
                 do
                 {
                     i = 0;
-                    bool result = char.TryParse(Console.ReadLine(), out char key);
+                    bool result = char.TryParse(Console.ReadLine(), out  key);
                     if (result == false)
                     {
                         Console.WriteLine("Error! Enter one character!");
@@ -71,7 +72,7 @@ namespace AirCompany
                 do
                 {
                     i = 0;
-                    bool result = char.TryParse(Console.ReadLine(), out char key);
+                    bool result = char.TryParse(Console.ReadLine(), out  key);
                     if (result == false)
                     {
                         Console.WriteLine("Error! Enter one character!");
@@ -89,7 +90,15 @@ namespace AirCompany
                         }
                     }
                 } while (i != 0);
-                Plane.SetAltitude(NewAltitude);
+                try
+                {
+                    Plane.SetAltitude(NewAltitude);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadKey();
+                }
                 Console.Clear();
                 Console.WriteLine("Altitude - " + Plane.Altitude);
                 Console.WriteLine("Do You want to  continue?(y/n) ");  

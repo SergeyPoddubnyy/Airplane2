@@ -38,19 +38,21 @@ namespace AirCompany
 
         protected int Climb(int increment)
         {
+            if (Altitude > 15000) throw new Exception("Altiude>15000!");
             if (Forsage) increment *= 2;
             if (!AutoPilotOn) return Altitude += increment;
             if (Altitude + increment < MaxAltitudeAuto)
             {
                 return Altitude += increment;
             }
-
+            
             return Altitude = MaxAltitudeAuto;
         }
 
         protected int Down(int increment)
         {
-            if (AutoPilotOn)
+           
+                if (AutoPilotOn)
             {
                 if (Altitude - increment > MinAltitudeAuto)
                 {
@@ -66,6 +68,8 @@ namespace AirCompany
 
         public int SetAltitude(int targetAlitude)
         {
+            
+          
             int temp = _altitudeIncrement;
             if (AutoPilotOn && targetAlitude >= MaxAltitudeAuto)
             {
@@ -83,12 +87,16 @@ namespace AirCompany
                 if (Altitude > targetAlitude) Down(_altitudeIncrement);
                     else Climb(_altitudeIncrement);
                 if (Altitude < 0) Altitude = 0;
+
                 Console.WriteLine("Altitude - " + Altitude);
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 Console.Clear();
             }
+          
             _altitudeIncrement = temp;
             return Altitude;
+
+
         }
 
         public override string ToString()
